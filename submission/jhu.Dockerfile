@@ -1,8 +1,6 @@
 FROM scilus/scilus:2.1.0 as beyond_fa_scil_team
 
-ARG USERNAME=non-root-user
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+ARG USERNAME=user
 
 RUN groupadd -r $USERNAME \
     && useradd --no-log-init -r -g $USERNAME $USERNAME \
@@ -29,7 +27,7 @@ RUN bash nextflow && \
     mv nextflow /usr/bin/nextflow && \
     apt-get -y autoremove
 
-RUN pip install SimpleITK 
+RUN pip install SimpleITK
 
 # Fix permission access to all processing dependencies
 WORKDIR /
